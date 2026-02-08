@@ -4139,20 +4139,38 @@ const ui = {
         msg.innerText = '';
         choiceArea.innerHTML = '';
 
+        // クリア処理
         if (step.type === "clear") {
             ui.handleClear();
             return;
         }
 
         const p = document.createElement('p');
-        const speakerClass = step.speaker === "あなた" ? "player-name" : "detective-name";
-        p.innerHTML = `<span class="${speakerClass}">${step.speaker}:</span><span class="text-content"></span>`;
+        
+        // スピーカー名の処理（容疑者リストの場合は名前を自動設定）
+        let speakerName = step.speaker;
+        if (!speakerName && step.type === "容疑者リスト") {
+            speakerName = "容疑者リスト";
+        }
+
+        const speakerClass = speakerName === "あなた" ? "player-name" : "detective-name";
+        
+        // スピーカーがいる場合といない場合で表示を分ける
+        if (speakerName) {
+            p.innerHTML = `<span class="${speakerClass}">${speakerName}:</span><span class="text-content"></span>`;
+        } else {
+            p.innerHTML = `<span class="text-content"></span>`;
+        }
+        
         log.appendChild(p);
         log.scrollTop = log.scrollHeight;
 
         const textSpan = p.querySelector('.text-content');
+        
+        // テキスト表示後の処理
         ui.typeWrite(textSpan, step.text, () => {
-            if (step.type === "talk") {
+            // ★ここが修正ポイント：typeが "talk" または "容疑者リスト" の場合に「次へ」ボタンを出す
+            if (step.type === "talk" || step.type === "容疑者リスト") {
                 const nextBtn = document.createElement('button');
                 nextBtn.innerText = "▶ 次へ";
                 nextBtn.onclick = () => {
