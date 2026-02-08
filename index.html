@@ -493,6 +493,28 @@ const cases = [
     },
   
   {
+        id: 5,
+        title: "File 05: 鏡の中の数字",
+        cleared: false,
+        sequence: [
+            { type: "talk", speaker: "目暮 警視", text: "現場はブティックの試着室だ。被害者の手元には、口紅で書かれた『 1 0 1 』という数字がある。" },
+            { type: "talk", speaker: "目暮 警視", text: "容疑者はこの3人に絞られた。どいつもこの店にいた客だ。" },
+            { type: "talk", speaker: "目暮 警視", text: "1. 二宮（Ninomiya）\n2. 百瀬（Momose）\n3. 千葉（Chiba）" },
+            { 
+                type: "quiz", 
+                speaker: "あなた", 
+                text: "（101という数字。これを漢字一文字として捉えると……？）",
+                choices: [
+                    { text: "『 百瀬 』さんだ。百（100）に一（1）を足すと、ちょうど101に見える", correct: true, feedback: "正解！ 漢字の『 百 』の上に『 一 』を乗せるようなイメージだな！" },
+                    { text: "『 二宮 』さんだ。1と1を足して2だから", correct: false, feedback: "少し単純すぎるな。数字の形そのものに注目しよう。" }
+                ]
+            },
+            { type: "talk", speaker: "目暮 警視", text: "なるほど、百に一を足して『百瀬』か！ よし、彼女を署まで連行しろ！" },
+            { type: "clear" }
+        ]
+    },
+  
+  {
         id: 6,
         title: "File 06: 三人の嘘つき",
         cleared: false,
